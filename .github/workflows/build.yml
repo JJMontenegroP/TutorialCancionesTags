@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12.6'
 
@@ -29,8 +29,8 @@ jobs:
       - name: Run tests with coverage
         run: |
           coverage run -m unittest discover -s tests
-          coverage xml -o coverage.xml  # Ensure it outputs to coverage.xml
-
+          coverage xml -o coverage.xml
+          
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
@@ -40,4 +40,3 @@ jobs:
         with:
           args: >
             -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.sourceEncoding=UTF-8  # Add source encoding, if necessary
