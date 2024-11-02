@@ -19,8 +19,11 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: '17' # Set this to the required Java version
-          distribution: 'adopt'
+          java-version: '17'
+          distribution: 'temurin' # 'temurin' is the new standard for OpenJDK
+
+      - name: Check Java Version
+        run: java -version
 
       - name: Set up Python
         uses: actions/setup-python@v4
