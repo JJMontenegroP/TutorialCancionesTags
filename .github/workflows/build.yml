@@ -32,19 +32,9 @@ jobs:
           coverage run -m unittest discover -s tests -p "*.py"
           coverage xml
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          JAVA_HOME: ${{ runner.tool_cache }}/javapackages/temurin-17/ # Set JAVA_HOME explicitly
-        with:
-          args: >
-            -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.python.version=3.12.6
+        
