@@ -1,8 +1,8 @@
-[run]
+[coverage:run]
+relative_files = True
 branch = True
-source =
-    src
-    tests
+source = src/
+# omit = bad_file.py
 
 [paths]
 source =
@@ -15,7 +15,9 @@ exclude_lines =
     pragma: no cover
     def __repr__
     if self\.debug
+
     raise AssertionError
     raise NotImplementedError
+
     if 0:
     if __name__ == .__main__.
