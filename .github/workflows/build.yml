@@ -25,13 +25,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox
           pip install -r requirements.txt
-          pip install pytest coverage
 
       - name: Run tests with coverage
         run: |
           tox -e py
-          coverage run -m pytest  # Run tests and collect coverage data
-          coverage xml -o coverage.xml  # Generate coverage report in XML format
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
