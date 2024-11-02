@@ -25,10 +25,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install coverage
           pip install -r requirements.txt
+
       - name: Run tests with coverage
         run: |
           coverage run -m unittest discover -s tests
-          coverage xml
+          coverage xml -o coverage.xml  # Ensure it outputs to coverage.xml
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
@@ -38,3 +40,5 @@ jobs:
         with:
           args: >
             -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.python.coverage.reportPaths=coverage.xml  # Make sure the coverage report path is correct
+            -Dsonar.sourceEncoding=UTF-8  # Add source encoding, if necessary
