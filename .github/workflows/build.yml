@@ -26,10 +26,14 @@ jobs:
           pip install coverage
           pip install -r requirements.txt
 
-      - name: Run tests with coverage
-        run: |
-          coverage run --source=src -m pytest
-          coverage xml -o coverage.xml
+      - name: Run tox
+        run: tox -e py
+      - name: Listar archivo de cobertura 2
+        run: pwd
+      - name: Listar archivo de cobertura
+        run: ls -ltha ./src
+      - name: Mostrar archivo cobertura
+        run: cat coverage.xml
           
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
