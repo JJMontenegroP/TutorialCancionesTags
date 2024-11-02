@@ -1,4 +1,5 @@
 .idea/*
+env/*
 src/modelo/__pycache__/*
 src/logica/__pycache__/*
 src/vista/__pycache__/*
