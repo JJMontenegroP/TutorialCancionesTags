@@ -40,5 +40,4 @@ jobs:
         with:
           args: >
             -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.python.coverage.reportPaths=coverage.xml  # Make sure the coverage report path is correct
             -Dsonar.sourceEncoding=UTF-8  # Add source encoding, if necessary
