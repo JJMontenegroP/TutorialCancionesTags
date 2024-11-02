@@ -22,17 +22,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      #- name: Correr pruebas
-      #  id: correr-pruebas
-      #  run: python -m unittest discover -s tests
+     
       - name: Run tox
-        run: tox -e py
-      - name: Listar archivo de cobertura 2
-        run: pwd
-      - name: Listar archivo de cobertura
-        run: ls -ltha ./src
-      - name: Mostrar archivo cobertura
-        run: cat coverage.xml
+        run: |
+          tox -e py
+        
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
