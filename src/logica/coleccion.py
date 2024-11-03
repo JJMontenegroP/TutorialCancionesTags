@@ -48,9 +48,7 @@ class Coleccion():
         albumes = [elem.__dict__ for elem in session.query(Album).all()]
         for album in albumes:
             album["interpretes"] = self.dar_interpretes_de_album(album["id"])
-            del album["id"]
         return albumes
-
 
     def dar_interpretes_de_album(self, album_id):
         canciones = session.query(Cancion).filter(Cancion.albumes.any(Album.id.in_([album_id]))).all()
