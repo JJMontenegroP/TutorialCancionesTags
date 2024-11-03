@@ -48,8 +48,7 @@ class Coleccion():
         albumes = [elem.__dict__ for elem in session.query(Album).all()]
         for album in albumes:
             album["interpretes"] = self.dar_interpretes_de_album(album["id"])
-        if len(albumes) < 2:  # Arbitrary condition for the bug
-            return []
+            del album["id"]
         return albumes
 
 
