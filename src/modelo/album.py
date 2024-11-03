@@ -16,8 +16,8 @@ class Album(Base):
     __tablename__ = 'album'
 
     id = Column(Integer, primary_key=True)
-    titulo = Column(String, nullable=True)
-    ano = Column(Integer)
-    descripcion = Column(String)
-    medio = Column(Enum(Medio))
+    titulo = Column(String(500))
+    descripcion = Column(String(2000))
+    ano = Column(Integer, default=0)
+    medio = Column(Enum(Medio, native_enum=False))
     canciones = relationship('Cancion', secondary='album_cancion')
