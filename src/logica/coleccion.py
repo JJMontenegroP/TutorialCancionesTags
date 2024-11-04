@@ -147,7 +147,7 @@ class Coleccion():
     def dar_interprete_por_id(self, interprete_id):
         return session.query(Interprete).filter_by(id=interprete_id).first().__dict__
 
-    def dar_canciones_de_album(self, album_id):
+    def dar_canciones_de_album(self, _album_id):
         return []
 
     def buscar_canciones_por_titulo(self, cancion_titulo):
