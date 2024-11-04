@@ -193,42 +193,45 @@ class Ventana_Cancion(QWidget):
             mensaje_error.setText("La canción debe tener al menos un intérprete")
             mensaje_error.setStandardButtons(QMessageBox.Ok)
             mensaje_error.exec_()
-        else:
-            if self.cancion_actual == None:
-                #Si no hay una canción actual definida, la canción es nueva y se debe crear en la lógica
-                self.interfaz.crear_cancion({"titulo":self.texto_cancion.text(),"minutos":self.texto_minutos.text(), "segundos":self.texto_segundos.text(), "compositor":self.texto_compositor.text()}, self.interpretes, id_album=self.id_album)
-            else:
-                #Si ya hay una canción actual, se debe actualizar
-                for id in self.interpretes_a_eliminar:
-                    if id != "n":
-                        self.interfaz.eliminar_interprete(id)
-                self.interpretes_a_eliminar = []
-                self.cancion_actual["titulo"]=self.texto_cancion.text()
-                self.cancion_actual["minutos"]=self.texto_minutos.text()
-                self.cancion_actual["segundos"]=self.texto_segundos.text()
-                self.cancion_actual["compositor"]=self.texto_compositor.text()
-                if self.cancion_actual["titulo"] == "" or self.cancion_actual["minutos"] == "" or self.cancion_actual["segundos"] == "":
-                    mensaje_error = QMessageBox()
-                    mensaje_error.setIcon(QMessageBox.Critical)
-                    mensaje_error.setWindowTitle("Error al guardar canción")
-                    mensaje_error.setText("Ningún campo debe estar vacio")
-                    mensaje_error.setStandardButtons(QMessageBox.Ok)
-                    mensaje_error.exec_()
-                elif int(self.cancion_actual["minutos"]) == 0 and int(self.cancion_actual["segundos"]) < 10:
-                    mensaje_error = QMessageBox()
-                    mensaje_error.setIcon(QMessageBox.Critical)
-                    mensaje_error.setWindowTitle("Error al guardar canción")
-                    mensaje_error.setText("La duración de la canción debe ser mínimo de 10 sg")
-                    mensaje_error.setStandardButtons(QMessageBox.Ok)
-                    mensaje_error.exec_()
-                else:
-                    self.interfaz.guardar_cancion(self.cancion_actual, self.interpretes)
 
-            if self.id_album != -1:
-                #Si hay un album definido, se regresa a la vista del album, de lo contrario, se creo la canción sola.
-                self.hide()
-                self.interfaz.mostrar_ventana_album(self.id_album)
-                self.id_album = -1
+            return
+
+        if self.cancion_actual is None:
+            #Si no hay una canción actual definida, la canción es nueva y se debe crear en la lógica
+            self.interfaz.crear_cancion({"titulo":self.texto_cancion.text(),"minutos":self.texto_minutos.text(), "segundos":self.texto_segundos.text(), "compositor":self.texto_compositor.text()}, self.interpretes, id_album=self.id_album)
+            return
+
+        #Si ya hay una canción actual, se debe actualizar
+        for id in self.interpretes_a_eliminar:
+            if id != "n":
+                self.interfaz.eliminar_interprete(id)
+        self.interpretes_a_eliminar = []
+        self.cancion_actual["titulo"]=self.texto_cancion.text()
+        self.cancion_actual["minutos"]=self.texto_minutos.text()
+        self.cancion_actual["segundos"]=self.texto_segundos.text()
+        self.cancion_actual["compositor"]=self.texto_compositor.text()
+        if self.cancion_actual["titulo"] == "" or self.cancion_actual["minutos"] == "" or self.cancion_actual["segundos"] == "":
+            mensaje_error = QMessageBox()
+            mensaje_error.setIcon(QMessageBox.Critical)
+            mensaje_error.setWindowTitle("Error al guardar canción")
+            mensaje_error.setText("Ningún campo debe estar vacio")
+            mensaje_error.setStandardButtons(QMessageBox.Ok)
+            mensaje_error.exec_()
+        elif int(self.cancion_actual["minutos"]) == 0 and int(self.cancion_actual["segundos"]) < 10:
+            mensaje_error = QMessageBox()
+            mensaje_error.setIcon(QMessageBox.Critical)
+            mensaje_error.setWindowTitle("Error al guardar canción")
+            mensaje_error.setText("La duración de la canción debe ser mínimo de 10 sg")
+            mensaje_error.setStandardButtons(QMessageBox.Ok)
+            mensaje_error.exec_()
+        else:
+            self.interfaz.guardar_cancion(self.cancion_actual, self.interpretes)
+
+        if self.id_album != -1:
+            #Si hay un album definido, se regresa a la vista del album, de lo contrario, se creo la canción sola.
+            self.hide()
+            self.interfaz.mostrar_ventana_album(self.id_album)
+            self.id_album = -1
 
     def eliminar_interprete(self, n_interprete):
         '''
