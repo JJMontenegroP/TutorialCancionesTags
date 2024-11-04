@@ -4,9 +4,6 @@ import src.vista.interfaz_coleccion as ic
 from src.logica.coleccion import Coleccion
 from src.modelo.declarative_base import session, Base, engine
 
-def bug(test):
-    print(test)
-
 if __name__ == '__main__':
     Base.metadata.create_all(engine)
     session.close()
@@ -14,5 +11,4 @@ if __name__ == '__main__':
     coleccion = Coleccion()
 
     app = ic.App(sys.argv, coleccion)
-    bug()
     sys.exit(app.exec_())
