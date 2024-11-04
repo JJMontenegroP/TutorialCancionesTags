@@ -7,6 +7,9 @@ class Ventana_Cancion(QWidget):
     '''
     Ventana que permite ver una canción
     '''
+
+    error_save_song = "Error al guardar canción"
+
     def __init__(self, interfaz):
         '''
         Método constructor de la ventana
@@ -189,7 +192,7 @@ class Ventana_Cancion(QWidget):
         if len(self.interpretes) == 0:
             mensaje_error = QMessageBox()
             mensaje_error.setIcon(QMessageBox.Critical)
-            mensaje_error.setWindowTitle("Error al guardar canción")
+            mensaje_error.setWindowTitle(self.error_save_song)
             mensaje_error.setText("La canción debe tener al menos un intérprete")
             mensaje_error.setStandardButtons(QMessageBox.Ok)
             mensaje_error.exec_()
@@ -213,14 +216,14 @@ class Ventana_Cancion(QWidget):
         if self.cancion_actual["titulo"] == "" or self.cancion_actual["minutos"] == "" or self.cancion_actual["segundos"] == "":
             mensaje_error = QMessageBox()
             mensaje_error.setIcon(QMessageBox.Critical)
-            mensaje_error.setWindowTitle("Error al guardar canción")
+            mensaje_error.setWindowTitle(self.error_save_song)
             mensaje_error.setText("Ningún campo debe estar vacio")
             mensaje_error.setStandardButtons(QMessageBox.Ok)
             mensaje_error.exec_()
         elif int(self.cancion_actual["minutos"]) == 0 and int(self.cancion_actual["segundos"]) < 10:
             mensaje_error = QMessageBox()
             mensaje_error.setIcon(QMessageBox.Critical)
-            mensaje_error.setWindowTitle("Error al guardar canción")
+            mensaje_error.setWindowTitle(self.error_save_song)
             mensaje_error.setText("La duración de la canción debe ser mínimo de 10 sg")
             mensaje_error.setStandardButtons(QMessageBox.Ok)
             mensaje_error.exec_()
